@@ -41,14 +41,21 @@ export const PostSection: React.FC<IProps> = ({ user }) => {
   return (
     <div>
       <div className='p-5 font-bold'>
-        <h2>Здравствуйте, {user.email}</h2>
+        <h2 className='text-2xl'>Здравствуйте, {user.email}</h2>
       </div>
       <CreatePostForm onSubmit={handleSubmitCreatePostForm} user={user}/>
-      <div className='mt-2 grid grid-cols-1 w-full gap-2 md:grid-cols-2'>
-        {posts?.length === 0 && (<span>Поки немає постів</span>)}
-        {posts?.map((post: IPost, index: number) => (
-          <Post key={post.id + index} post={post}/>
-        ))}
+      <div className='mt-6'>
+        <div>
+          <h2 className="text-xl font-bold">
+            Список постів: {posts?.length}
+          </h2>
+        </div>
+        <div className='mt-2 grid grid-cols-1 w-full gap-2 md:grid-cols-2'>
+          {posts?.length === 0 && (<span>Поки немає постів</span>)}
+          {posts?.map((post: IPost, index: number) => (
+            <Post key={post.id + index} post={post}/>
+          ))}
+        </div>
       </div>
     </div>
   )

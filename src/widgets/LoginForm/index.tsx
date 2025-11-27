@@ -36,9 +36,16 @@ export const LoginForm: React.FC<IProps> = ({ onLogin }) => {
   return (
     <form 
       onSubmit={handleSubmit(onSubmit)} 
-      className='w-fit m-auto bg-gray-200 p-5 flex flex-col gap-2 rounded-lg'
+      className='max-w-[400px] m-auto p-5 flex flex-col gap-2 rounded-lg'
     >
-      {error && <span style={{ color: 'red' }}>{error}</span>}
+      <div className='py-2'>
+        <h2 className='text-xl font-bold'>Логин</h2>
+      </div>
+      {error && (
+        <span className='text-red-500 font-bold'>
+          {error}
+        </span>
+      )}
       <div>
         <input {...register('email')} placeholder="Email" />
       </div>
@@ -46,7 +53,7 @@ export const LoginForm: React.FC<IProps> = ({ onLogin }) => {
         <input {...register('password', { required: true })} placeholder="Password" />
       </div>
       <button type="submit" disabled={isSubmitting} className='w-full'>
-        Войти
+        {isSubmitting ? "Загрузка..." : "Войти"}
       </button>
     </form>
   )
