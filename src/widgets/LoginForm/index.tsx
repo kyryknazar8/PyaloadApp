@@ -34,7 +34,10 @@ export const LoginForm: React.FC<IProps> = ({ onLogin }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form 
+      onSubmit={handleSubmit(onSubmit)} 
+      className='w-fit m-auto bg-gray-200 p-5 flex flex-col gap-2 rounded-lg'
+    >
       {error && <span style={{ color: 'red' }}>{error}</span>}
       <div>
         <input {...register('email')} placeholder="Email" />
@@ -42,7 +45,7 @@ export const LoginForm: React.FC<IProps> = ({ onLogin }) => {
       <div>
         <input {...register('password', { required: true })} placeholder="Password" />
       </div>
-      <button type="submit" disabled={isSubmitting}>
+      <button type="submit" disabled={isSubmitting} className='w-full'>
         Войти
       </button>
     </form>

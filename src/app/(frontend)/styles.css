@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --font-mono: 'Roboto Mono', monospace;
 }
@@ -85,3 +87,19 @@ svg {
 main {
   padding: 10px;
 }
+
+input, textarea {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 2px;
+  background-color: white;
+}
+
+button {
+  background-color: rgb(80, 80, 220);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
