@@ -12,7 +12,7 @@ export const Posts: CollectionConfig = {
       relationTo: "categories",
       hasMany: true,
     },
-    { name: "content", type: "richText" },
+    { name: "content", type: "text" },
     {
       name: "owner",
       type: "relationship",

@@ -2,14 +2,20 @@
 
 import React from 'react'
 import type { IUser } from '@/entities/user/model/user.type'
-import { useQuery } from '@tanstack/react-query'
+import type { IPost, ICreatePost } from '@/entities/post/model/post.type'
+import { Post } from '@/entities/post/ui/Post'
 import { getPosts } from '@/server/actions/getPosts'
+import { CreatePostForm } from './ui/CreatePostForm'
+import { createPost } from '@/server/actions/createPost'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 interface IProps {
   user: IUser
 }
 
 export const PostSection: React.FC<IProps> = ({ user }) => {
+  const queryClient = useQueryClient()
+
   const {
     data: posts,
     isLoading,
@@ -19,12 +25,29 @@ export const PostSection: React.FC<IProps> = ({ user }) => {
     queryFn: () => getPosts(),
   })
 
-  if (isLoading) return <p>Loading posts...</p>
-  if (error) return <p>Error: {(error as Error).message}</p>
+  const handleSubmitCreatePostForm = async (post: ICreatePost) => {
+    try {
+      const newPost = await createPost(post)
+      await queryClient.invalidateQueries({ queryKey: ['posts'] })
+      console.log(newPost)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  if (isLoading) return <p>Загрузка постів...</p>
+  if (error) return <p>Помилка: {(error as Error).message}</p>
 
   return (
     <div>
       <h3>Здравствуйте, {user.email}</h3>
+      <CreatePostForm onSubmit={handleSubmitCreatePostForm} user={user}/>
+      <div style={{ paddingTop: '5px' }}>
+        {posts?.length === 0 && (<span>Поки немає постів</span>)}
+        {posts?.map((post: IPost, index: number) => (
+          <Post key={post.id + index} post={post}/>
+        ))}
+      </div>
     </div>
   )
 }
