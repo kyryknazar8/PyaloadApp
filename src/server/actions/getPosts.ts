@@ -2,8 +2,9 @@
 
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import type { IPost } from '@/entities/post/model/post.type'
 
-export const getPosts = async () => {
+export const getPosts = async (): Promise<IPost[]> => {
   try {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
@@ -14,11 +15,9 @@ export const getPosts = async () => {
       sort: '-createdAt',
     })
 
-    return posts.docs
+    return posts.docs as unknown as IPost[]
   } catch (error) {
-    return {
-      success: false,
-      message: (error as Error).message,
-    }
+    console.log(error)
+    throw new Error("Не вдалось отримати пости")
   }
 }
