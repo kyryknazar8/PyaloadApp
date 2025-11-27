@@ -31,28 +31,25 @@ export const CreatePostForm: React.FC<IProps> = ({ onSubmit, user }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form 
+      onSubmit={handleSubmit(handleFormSubmit)}
+      className="p-5 bg-gray-200 max-w-[500px] m-auto rounded-lg"
+    >
       <div>
         <div><label>Title</label></div>
-        <input {...register('title')} />
+        <input {...register('title')} className='w-full' />
       </div>
       <div>
         <div><label>Slug</label></div>
-        <input {...register('slug')} />
+        <input {...register('slug')} className='w-full' />
       </div>
-      {/* <div>
-        <label>Categories (IDs comma separated)</label>
-        <input
-          {...register('categories', {
-            setValueAs: (v) => v.split(',').map((s: ICategory) => s),
-          })}
-        />
-      </div> */}
       <div>
         <div><label>Content</label></div>
-        <textarea {...register('content')} />
+        <textarea {...register('content')} className='w-full' />
       </div>
-      <button type="submit">Створити</button>
+      <button type="submit" className='w-full'>
+        Створити
+      </button>
     </form>
   )
 }

@@ -7,10 +7,14 @@ interface IProps {
 
 export const Post: React.FC<IProps> = ({ post }) => {
   return (
-    <div style={{ padding: '5px', border: '1px solid #000' }}>
-      <div>Title: {post.title}</div>
+    <div className='bg-blue-200 block p-6 rounded-lg shadow-xs'>
+      <div><span className=''>Title:</span> {post.title}</div>
       <div>Slug: {post.slug}</div>
-      <div>Content: {post.content ? JSON.stringify(post.content) : 'No content'}</div>
+      <div>
+        <p>
+          {post.content ? JSON.stringify(post.content) : 'No content'}
+        </p>
+      </div>
       <div>Created at: {post.createdAt}</div>
     </div>
   )
